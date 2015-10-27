@@ -3,17 +3,25 @@
     sql: |
       select * from 
       [fh-bigquery:liquor.iowa]
-      limit 10
-
+ 
   fields:
   - measure: count
     type: count
     drill_fields: detail*
 
-  - dimension: date
-    type: string
-    sql: ${TABLE}.date
+  - measure: total_sales
+    type: sum
+    sql: ${TABLE}.total
+    
+  - dimension_group: date
+    type: time
+    timeframes: [date, week, month, day_of_week, year]
+    sql: timestamp(${TABLE}.date)
 
+  - dimension: month
+    type: number
+    sql: month(${TABLE}.date)
+    
   - dimension_group: convenience_store
     type: time
     timeframes: [time, date, week, month]
