@@ -22,6 +22,9 @@
 - explore: people_gender
 - explore: people_names
 - explore: people_place_of_birth
+  joins: 
+    - join: place_of_birth_names
+      sql_on: ${people_place_of_birth.place_of_birth} = ${place_of_birth_names.sub}
 - explore: people_profession
 - explore: place_of_birth_names
 - explore: place_of_birth_to_country
