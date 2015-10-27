@@ -20,7 +20,19 @@
 - explore: gender_names
 - explore: people_date_of_birth
 - explore: people_gender
+  joins:
+    - join: gender_names
+      sql_on: ${people_gender.gender} = ${gender_names.sub}
 - explore: people_names
+  joins:
+    - join: people_gender
+      sql_on: ${people_names.sub} = ${people_gender.sub}
+    - join: gender_names
+      sql_on: ${people_gender.gender} = ${gender_names.sub}
+    - join: people_place_of_birth
+      sql_on: ${people_names.sub} = ${people_place_of_birth.sub}
+    - join: place_of_birth_names
+      sql_on: ${people_place_of_birth.place_of_birth} = ${place_of_birth_names.sub}
 - explore: people_place_of_birth
   joins: 
     - join: place_of_birth_names
